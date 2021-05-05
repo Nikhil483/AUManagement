@@ -1,0 +1,76 @@
+/*.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height : 8%;
+  font-size: 14px;
+}
+
+.float {
+  float: right;
+}
+*/
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 270px;
+  border-color: #0c0c0c;
+}
+
+.mat-toolbar .mat-primary {
+  top: 0;
+  z-index: 1;
+  text-align: center;
+  justify-content: center;
+}
+
+.buttonStyle {
+  background: #f8e5e5;
+  border: 5px solid rgb(12, 12, 12);
+  border-radius: 5px;
+  cursor: pointer;
+  color: #0c0c0c;
+  box-shadow: 5px 7px 5px #888888;
+  text-align: center;
+  justify-content: center;
+  margin-right : 10px;
+  margin-left : 10px;
+  margin-top: 30px;
+  display: inline-block;
+}
+
+button:active {
+  background: rgb(70, 69, 69);
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+}
+
+.half-black {
+  background-color: #202020;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: right;
+  padding-right: 4em;
+}
+
+span { 
+  //margin-right:750px;
+}

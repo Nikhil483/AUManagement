@@ -1,0 +1,278 @@
+<!--Navbar-->
+<mdb-navbar
+  SideClass="navbar navbar-dark red navbar-expand-lg  lighten-1"
+  [containerInside]="false"
+>
+  <!-- Navbar brand -->
+  <mdb-navbar-brand
+    ><a class="navbar-brand" href="#"
+      >Oppurtunity Management</a
+    ></mdb-navbar-brand
+  >
+
+  <!-- Collapsible content -->
+  <links>
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect
+          >{{ "Welcome " + name }}<span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect></a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          (click)="createOppurtunity()"
+          >Create</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect (click)="frame.show()"
+          >Advanced Search</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect (click)="trends()"
+          >Oppurtunity Trends</a
+        >
+      </li>
+    </ul>
+    <!-- Links -->
+    <form class="form-inline waves-light" mdbWavesEffect>
+      <div class="md-form my-0">
+        <input
+          (keyup)="applyFilter($event.target.value)"
+          class="form-control mr-sm-2"
+          type="text"
+          placeholder="Search"
+        />
+      </div>
+    </form>
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item avatar dropdown" dropdown>
+        <a
+          dropdownToggle
+          mdbWavesEffect
+          type="button"
+          class="nav-link dropdown-toggle waves-light"
+          mdbWavesEffect
+        >
+          <img src="{{ photoUrl }}" alt="" class="img-fluid rounded-circle"
+        /></a>
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown-menu-right dropdown dropdown-primary"
+          role="menu"
+        >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            (click)="myAccount()"
+            >My account</a
+          >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            (click)="signOut()"
+            >Log out</a
+          >
+        </div>
+      </li>
+    </ul>
+  </links>
+  <!-- Collapsible content -->
+</mdb-navbar>
+<!--/.Navbar-->
+
+<div
+  mdbModal
+  #frame="mdbModal"
+  class="modal fade top"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog cascading-modal modal-avatar modal-md"
+    role="document"
+  >
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <img
+          src="assets/images/advancedSearch.png"
+          alt="avatar"
+          class="rounded-circle img-responsive"
+        />
+      </div>
+      <!--Body-->
+      <div class="modal-body mb-1">
+        <form [formGroup]="searchForm" (submit)="advancedSearch()">
+          <h5 class="mt-1 mb-2 text-center">
+            Advanced Search With Optional Parameters
+          </h5>
+
+          <div class="md-form mb-4">
+            <i class="fas fa-globe-africa prefix grey-text"></i>
+            <input
+              type="text"
+              id="form3"
+              class="form-control"
+              formControlName="Jlocation"
+              mdbInput
+              mdbValidate
+            />
+            <label for="form3">Joining location</label>
+          </div>
+
+          <div class="md-form mb-4">
+            <i class="fas fa-skiing prefix grey-text "></i>
+            <input
+              type="text"
+              id="form3"
+              class="form-control"
+              formControlName="skill"
+              mdbInput
+              mdbValidate
+            />
+            <label for="form3">Skill</label>
+          </div>
+
+          <div class="md-form mb-4">
+            <i class="fas fa-industry prefix grey-text"></i>
+            <input
+              type="text"
+              id="form3"
+              class="form-control"
+              formControlName="HiringManager"
+              mdbInput
+              mdbValidate
+            />
+            <label for="form3">Hiring Manager</label>
+          </div>
+
+          <div class="md-form mb-4">
+            <i class="fas fa-sort-numeric-up-alt prefix grey-text"></i>
+            <input
+              type="text"
+              id="form3"
+              class="form-control"
+              formControlName="experience"
+              mdbInput
+              mdbValidate
+            />
+            <label for="form3">Experience</label>
+          </div>
+
+          <div class="md-form">
+            <i class="fas fa-calendar-alt prefix grey-text"></i>
+            <input
+              type="text"
+              id="date-picker-example"
+              class="form-control datepicker"
+            />
+            <label for="date-picker-example">Start Date</label>
+          </div>
+
+          <div class="md-form">
+            <i class="fas fa-calendar-alt prefix grey-text"></i>
+            <input
+              type="text"
+              id="date-picker-example"
+              class="form-control datepicker"
+            />
+            <label for="date-picker-example">End Date</label>
+          </div>
+
+          <div class="text-center mt-4">
+            <button
+              mdbBtn
+              color="cyan"
+              rounded="true"
+              class="mt-1 waves-light"
+              mdbWavesEffect
+            >
+              Advanced Search
+              <i class="fab fa-searchengin ml-1"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+<table
+  mat-table
+  [dataSource]="dataSource"
+  multiTemplateDataRows
+  class="mat-elevation-z8 center"
+>
+  <ng-container
+    matColumnDef="{{ column }}"
+    *ngFor="let column of columnsToDisplay"
+  >
+    <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+    <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td
+    class="design"
+      mat-cell
+      *matCellDef="let element"
+      [attr.colspan]="columnsToDisplay.length"
+    >
+      <div
+        class="example-element-detail"
+        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
+      >
+        <div class="example-element-diagram">
+          <div class="example-element-position">{{ element.position }}</div>
+          <div class="example-element-symbol">{{ element.symbol }}</div>
+          <div class="example-element-name">{{ element.name }}</div>
+          <div class="example-element-weight">{{ element.weight }}</div>
+        </div>
+        <div class="example-element-description">
+          {{ element.description }}
+          <span class="example-element-description-attribution">
+            -- Wikipedia
+          </span>
+          <br>
+          <button type="button" class="btn btn-warning btn-rounded" (click)="editOppurtunity()">
+            Edit Oppurtunity
+          </button>
+          <button type="button" class="btn btn-danger btn-rounded" (click)="deleteOppurtunity()">
+            Delete Oppurtunity
+          </button>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr
+    mat-row
+    *matRowDef="let element; columns: columnsToDisplay"
+    class="example-element-row"
+    [class.example-expanded-row]="expandedElement === element"
+    (click)="expandedElement = expandedElement === element ? null : element"
+  ></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: ['expandedDetail']"
+    class="example-detail-row"
+  ></tr>
+</table>

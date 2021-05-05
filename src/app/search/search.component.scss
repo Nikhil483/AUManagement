@@ -1,0 +1,78 @@
+table {
+  width: 90%;
+  justify-content: center;
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: rgb(241, 152, 68);
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #f5dada;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+.inputField {
+  color : rgb(55, 99, 219);
+  background-color :white;
+  margin: 25px;
+  padding : 10px;
+  border-radius: 10px;
+  width : 70%
+}
+
+
+img {
+  height: auto;
+}
+
+th {
+  background-color : rgb(63, 61, 61);
+  color : white;
+}
+
+td.design {
+  background : linear-gradient(to right, rgb(24, 23, 23), rgb(138, 137, 138));
+  color : whitesmoke;
+}

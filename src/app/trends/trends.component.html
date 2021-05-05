@@ -1,0 +1,69 @@
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile
+    ><div style="display: block">
+      <h6>Number Of Oppurtunity Every Year</h6>
+      <canvas
+        class="graph"
+        mdbChart
+        [chartType]="yearChartType"
+        [datasets]="yearChartDatasets"
+        [labels]="yearChartLabels"
+        [colors]="yearChartColors"
+        [options]="chartOptions"
+        [legend]="true"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"
+      >
+      </canvas></div
+  ></mat-grid-tile>
+  <mat-grid-tile
+    ><div style="display: block">
+      <h6>Frequency of skills in Oppurtunity</h6>
+      <canvas
+        class="graph"
+        mdbChart
+        [chartType]="skillChartType"
+        [datasets]="skillChartDatasets"
+        [labels]="skillChartLabels"
+        [colors]="skillChartColors"
+        [options]="chartOptions"
+        [legend]="true"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"
+      >
+      </canvas>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile
+    ><h6>Number Of Oppurtunities For Each Location</h6><div style="display: block">
+      
+      <canvas
+        mdbChart
+        [chartType]="locChartType"
+        [datasets]="locChartDatasets"
+        [labels]="locChartLabels"
+        [colors]="locChartColors"
+        [options]="chartOptions"
+        [legend]="true"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"
+      >
+      </canvas></div
+  ></mat-grid-tile>
+  <mat-grid-tile
+    ><div style="display: block">
+      
+      <canvas
+        mdbChart
+        [chartType]="HMChartType"
+        [datasets]="HMChartDatasets"
+        [labels]="HMChartLabels"
+        [colors]="locChartColors"
+        [options]="chartOptions"
+        [legend]="true"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"
+      >
+      </canvas></div
+  ><h6>Frequency of Hiring Manager Stats Allotment</h6></mat-grid-tile>
+</mat-grid-list>
