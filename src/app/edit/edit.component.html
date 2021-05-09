@@ -1,57 +1,93 @@
 <div class="wrapper">
-    <div class="form-wrapper">
-      <form [formGroup]="editForm" (submit)="editOppurtunity()">
-        <h1>edit Oppurtunity</h1>
-  
-        <div class="firstName md-form">
-          <label htmlFor="firstName">Joining Location</label>
-          <input type="text" formControlName="Jlocation" mdbInput mdbValidate />
-        </div>
-        <div class="lastName md-form">
-          <label htmlFor="lastName">Hiring Manager</label>
-          <input
-            type="text"
-            formControlName="HiringManager"
-            mdbInput
-            mdbValidate
-          />
-        </div>
-        <div class="email md-form">
-          <label htmlFor="email">Skills</label>
-          <input type="text" formControlName="skill" mdbInput mdbValidate />
-        </div>
-        <div class="contact_no md-form">
-          <label htmlFor="email">Experience</label>
-          <input type="text" formControlName="experience" mdbInput mdbValidate />
-        </div>
-  
-        <div class="address md-form">
-          <label htmlFor="email">Department</label>
-          <input type="text" name="address" mdbInput mdbValidate />
-        </div>
-        <div class="md-form">
-          <i class="fas fa-calendar-alt prefix grey-text"></i>
-          <input
-            type="text"
-            id="date-picker-example"
-            class="form-control datepicker"
-          />
-          <label for="date-picker-example">Start Date</label>
-        </div>
-  
-        <div class="md-form">
-          <i class="fas fa-calendar-alt prefix grey-text"></i>
-          <input
-            type="text"
-            id="date-picker-example"
-            class="form-control datepicker"
-          />
-          <label for="date-picker-example">End Date</label>
-        </div>
-        <div class="createAccount">
-          <button class="mt-1 waves-light" type="submit">Edit Account</button>
-        </div>
-      </form>
-    </div>
+  <div class="form-wrapper">
+    <form [formGroup]="editForm" (submit)="editOppurtunity()">
+      <h1>Create Oppurtunity</h1>
+
+      <div class="firstName md-form">
+        <label htmlFor="firstName">Joining Location</label>
+        <input
+          type="text"
+          formControlName="Jlocation"
+          placeholder="{{ currentOppurtunity.location }}"
+          mdbInput
+          mdbValidate
+        />
+      </div>
+      <div class="lastName md-form">
+        <label htmlFor="lastName">Hiring Manager</label>
+        <input
+          type="text"
+          formControlName="HiringManager"
+          placeholder="{{ currentOppurtunity.hiringManager }}"
+          mdbInput
+          mdbValidate
+        />
+      </div>
+      <div class="email md-form">
+        <label htmlFor="email">Skills</label>
+        <input
+          type="text"
+          formControlName="skill"
+          placeholder="{{ currentOppurtunity.skill }}"
+          mdbInput
+          mdbValidate
+        />
+      </div>
+      <div class="contact_no md-form">
+        <label htmlFor="email">Experience</label>
+        <input
+          type="text"
+          formControlName="experience"
+          placeholder="{{ currentOppurtunity.experience }}"
+          mdbInput
+          mdbValidate
+        />
+      </div>
+
+      <div class="address md-form">
+        <label htmlFor="email">Department</label>
+        <input
+          type="text"
+          formControlName="Department"
+          placeholder="{{ currentOppurtunity.department }}"
+          mdbInput
+          mdbValidate
+        />
+      </div>
+      <div class="md-form">
+        <i class="fas fa-calendar-alt prefix grey-text"></i>
+        <input
+          type="text"
+          id="date-picker-example"
+          class="form-control datepicker"
+          placeholder="{{ currentOppurtunity.startDate }}"
+        />
+        <label for="date-picker-example">Start Date</label>
+      </div>
+
+      <div class="md-form">
+        <i class="fas fa-calendar-alt prefix grey-text"></i>
+        <input
+          type="text"
+          id="date-picker-example"
+          class="form-control datepicker"
+          placeholder="{{ currentOppurtunity.endDate }}"
+        />
+        <label for="date-picker-example">End Date</label>
+      </div>
+      <div class="email md-form">
+        <label htmlFor="email">Description</label>
+        <input
+          type="text"
+          formControlName="description"
+          placeholder="{{ currentOppurtunity.description }}"
+          mdbInput
+          mdbValidate
+        />
+      </div>
+      <div class="createAccount">
+        <button class="mt-1 waves-light" type="submit">Create Account</button>
+      </div>
+    </form>
   </div>
-  
+</div>

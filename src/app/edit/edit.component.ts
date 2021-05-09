@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CrudOppService } from '../../services/crud-opp.service';
+
 
 import {
   FormBuilder,
@@ -10,21 +13,19 @@ import {
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss']
+  styleUrls: ['./edit.component.scss'],
 })
 export class EditComponent implements OnInit {
+  editParams: any;
+  id: number;
+  email : string;
+  currentOppurtunity: any;
 
-  editParams: {
-    Jlocation: any;
-    skill: any;
-    HiringManager: any;
-    Department: any;
-    experience: any;
-    startDate: any;
-    endDate: any;
-  };
-
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private _Activatedroute: ActivatedRoute,
+    private crudOppService: CrudOppService,
+  ) {
     this.editForm = this.formBuilder.group({
       Jlocation: [''],
       skill: [''],
@@ -33,10 +34,22 @@ export class EditComponent implements OnInit {
       experience: [''],
       startDate: new Date(),
       endDate: new Date(),
+      description:['']
     });
+
+
   }
 
   ngOnInit(): void {
+    this._Activatedroute.paramMap.subscribe((params) => {
+      this.id = parseInt(params.get('id'));
+      this.email = params.get('email')
+    });
+
+    this.crudOppService.getOppurtunity(this.id).subscribe((res) => {
+      console.log("edit",res);
+      this.currentOppurtunity = res;
+    });
   }
 
   editForm: any;
@@ -50,9 +63,13 @@ export class EditComponent implements OnInit {
       experience: this.editForm.value.experience,
       startDate: this.editForm.value.startDate,
       endDate: this.editForm.value.endDate,
+      description: this.editForm.value.description,
+      user:{ 
+        email: this.email
+      },
+      oppId: this.id
     };
 
     console.log('Seach params ', this.editParams);
   }
-
 }

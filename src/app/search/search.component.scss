@@ -1,12 +1,19 @@
 table {
-  width: 90%;
+  width: 80%;
+  justify-content: center;
+}
+
+mat-paginator {
+  margin-left: auto;
+  margin-right: auto;
+  width:80%;
   justify-content: center;
 }
 
 table.center {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 tr.example-detail-row {
@@ -14,7 +21,7 @@ tr.example-detail-row {
 }
 
 tr.example-element-row:not(.example-expanded-row):hover {
-  background: rgb(241, 152, 68);
+  background:linear-gradient(to right, rgb(243, 241, 126), rgb(241, 227, 241));
 }
 
 tr.example-element-row:not(.example-expanded-row):active {
@@ -70,9 +77,36 @@ img {
 th {
   background-color : rgb(63, 61, 61);
   color : white;
+  padding: auto;
 }
 
 td.design {
   background : linear-gradient(to right, rgb(24, 23, 23), rgb(138, 137, 138));
   color : whitesmoke;
+}
+
+.example-element-position {
+  margin-top : 20px;
+}
+
+mdb-card {
+  margin : auto;
+  margin-top : 10px;
+  margin-bottom : 10px;
+  background : linear-gradient(to left, rgb(24, 23, 23), rgb(247, 248, 174));
+}
+
+.list-item {
+  color : black;
+  background : linear-gradient(to left, rgb(243, 202, 202), rgb(247, 248, 174));
+}
+
+mdb-card-title {
+  margin : auto;
+  display : flex;
+  flex-direction : row;
+}
+
+.buttonplacement {
+  margin-left: auto;
 }

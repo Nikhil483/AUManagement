@@ -27,7 +27,7 @@
 
       <div class="address md-form">
         <label htmlFor="email">Department</label>
-        <input type="text" name="address" mdbInput mdbValidate />
+        <input type="text" formControlName="Department" name="address" mdbInput mdbValidate />
       </div>
       <div class="md-form">
         <i class="fas fa-calendar-alt prefix grey-text"></i>
@@ -47,6 +47,10 @@
           class="form-control datepicker"
         />
         <label for="date-picker-example">End Date</label>
+      </div>
+      <div class="email md-form">
+        <label htmlFor="email">Description</label>
+        <input type="text" formControlName="description" mdbInput mdbValidate />
       </div>
       <div class="createAccount">
         <button class="mt-1 waves-light" type="submit">Create Account</button>

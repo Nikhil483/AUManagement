@@ -9,6 +9,9 @@ import {
 } from 'angularx-social-login';
 
 import { UserDataService } from '../../services/user-data.service';
+import { ResultMessageService } from '../../services/result-message.service';
+import User from '../Model/User.model';
+import Token from '../Model/Token.model';
 
 @Component({
   selector: 'app-home',
@@ -20,10 +23,13 @@ export class HomeComponent implements OnInit {
   loggedIn: boolean;
   photoUrl: string;
 
+  userBody: any;
+
   constructor(
     private authService: SocialAuthService,
     private router: Router,
-    private userService: UserDataService
+    private userService: UserDataService,
+    private resultService: ResultMessageService
   ) {}
 
   ngOnInit() {
@@ -38,16 +44,36 @@ export class HomeComponent implements OnInit {
 
     this.authService.authState.subscribe((user) => {
       this.user = user;
-      console.log(this.user.photoUrl);
+      console.log(this.user)
+      
 
-      if (this.loggedIn) {
-        this.router.navigate([
-          'search',
-          this.user.photoUrl,
-          this.user.name,
-          this.user.email,
-        ]);
+      this.userBody = {
+        "name":this.user.name,
+        "email": this.user.email,
+        "photoUrl": this.user.photoUrl
       }
+
+      console.log(this.userBody)
+      this.userService.login(this.userBody).subscribe(
+        (token: Token) => {
+          localStorage.setItem('user', JSON.stringify(token));
+          if (this.loggedIn) {
+            this.router.navigate([
+              'search',
+              this.user.photoUrl,
+              this.user.name,
+              this.user.email,
+            ]);
+          }
+        },
+        (error) => {
+          this.resultService.success(
+            "Please use proper email address - This email doesn't have access to this functionality"
+          );
+        }
+      );
+
+      
     });
   }
 }

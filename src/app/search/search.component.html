@@ -33,11 +33,11 @@
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect></a>
       </li>
-      <li class="nav-item">
+      <!--<li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect (click)="frame.show()"
           >Advanced Search</a
         >
-      </li>
+      </li>-->
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect (click)="trends()"
           >Oppurtunity Trends</a
@@ -136,7 +136,7 @@
           </div>
 
           <div class="md-form mb-4">
-            <i class="fas fa-skiing prefix grey-text "></i>
+            <i class="fas fa-skiing prefix grey-text"></i>
             <input
               type="text"
               id="form3"
@@ -213,66 +213,130 @@
   </div>
 </div>
 
-<table
-  mat-table
-  [dataSource]="dataSource"
-  multiTemplateDataRows
-  class="mat-elevation-z8 center"
->
-  <ng-container
-    matColumnDef="{{ column }}"
-    *ngFor="let column of columnsToDisplay"
+<div class="center">
+  <table
+    mat-table
+    [dataSource]="opps"
+    matSort
+    multiTemplateDataRows
+    class="mat-elevation-z8 center"
   >
-    <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
-    <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
-  </ng-container>
-
-  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-  <ng-container matColumnDef="expandedDetail">
-    <td
-    class="design"
-      mat-cell
-      *matCellDef="let element"
-      [attr.colspan]="columnsToDisplay.length"
+    <ng-container
+      *ngFor="let column of columnsToDisplay"
+      matColumnDef="{{ column }}"
     >
-      <div
-        class="example-element-detail"
-        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
-      >
-        <div class="example-element-diagram">
-          <div class="example-element-position">{{ element.position }}</div>
-          <div class="example-element-symbol">{{ element.symbol }}</div>
-          <div class="example-element-name">{{ element.name }}</div>
-          <div class="example-element-weight">{{ element.weight }}</div>
-        </div>
-        <div class="example-element-description">
-          {{ element.description }}
-          <span class="example-element-description-attribution">
-            -- Wikipedia
-          </span>
-          <br>
-          <button type="button" class="btn btn-warning btn-rounded" (click)="editOppurtunity()">
-            Edit Oppurtunity
-          </button>
-          <button type="button" class="btn btn-danger btn-rounded" (click)="deleteOppurtunity()">
-            Delete Oppurtunity
-          </button>
-        </div>
-      </div>
-    </td>
-  </ng-container>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
+      <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr
-    mat-row
-    *matRowDef="let element; columns: columnsToDisplay"
-    class="example-element-row"
-    [class.example-expanded-row]="expandedElement === element"
-    (click)="expandedElement = expandedElement === element ? null : element"
-  ></tr>
-  <tr
-    mat-row
-    *matRowDef="let row; columns: ['expandedDetail']"
-    class="example-detail-row"
-  ></tr>
-</table>
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td
+        class="design"
+        mat-cell
+        *matCellDef="let element"
+        [attr.colspan]="columnsToDisplay.length"
+      >
+        <div
+          class="example-element-detail"
+          [@detailExpand]="
+            element == expandedElement ? 'expanded' : 'collapsed'
+          "
+        >
+          <!--<div class="example-element-position">Oppurtunity Id : {{ element.oppId }}</div>
+          <div class="example-element-position">Joining Location : {{ element.location }}</div>
+          <div class="example-element-name">Skill Requirement : {{ element.skill }}</div>
+          <div class="example-element-weight">Experience : {{ element.experience }}</div>
+          <div class="example-element-description">
+            {{ element.description }}
+            <span class="example-element-description-attribution">
+              -- Wikipedia
+            </span>
+            <br />
+            <button
+              type="button"
+              class="btn btn-warning btn-rounded"
+              (click)="editOppurtunity()"
+            >
+              Edit Oppurtunity
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger btn-rounded"
+              (click)="deleteOppurtunity()"
+            >
+              Delete Oppurtunity
+            </button>
+          </div>-->
+          <mdb-card style="width: 40rem">
+            <mdb-card-body>
+              <mdb-card-title>
+                <h5 class="font-weight-bold mb-3" style="font-size: 1.5em">
+                  {{ element.department }}
+                </h5>
+                <div class="buttonplacement">
+                  <button
+                    style="padding: 10px"
+                    type="button"
+                    class="btn btn-warning btn-rounded"
+                    (click)="editOppurtunity(element.oppId)"
+                  >
+                    <i class="fas fa-pen-nib"></i>
+                  </button>
+                  <button
+                    style="padding: 10px"
+                    type="button"
+                    class="btn btn-danger btn-rounded"
+                    (click)="deleteOppurtunity(element.oppId)"
+                  >
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </div>
+              </mdb-card-title>
+              <mdb-card-text class="mb-0">{{
+                element.description
+              }}</mdb-card-text>
+            </mdb-card-body>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item list-item">
+                {{ element.location }} will be the work location
+              </li>
+              <li class="list-group-item list-item">
+                {{ element.skill }} is the skill requirement
+              </li>
+              <li class="list-group-item list-item">
+                {{ element.hiringManager }} is assigned as Hiring Manager
+              </li>
+              <li class="list-group-item list-item">
+                {{ element.startDate }} - {{ element.endDate }} is the duration
+                of availability
+              </li>
+              <li class="list-group-item list-item">
+                {{ element.experience }} years will be the minimum experience
+                required
+              </li>
+            </ul>
+          </mdb-card>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr
+      mat-row
+      *matRowDef="let element; columns: columnsToDisplay"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: ['expandedDetail']"
+      class="example-detail-row"
+    ></tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[6, 8]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

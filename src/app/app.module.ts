@@ -6,6 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { InterceptorInterceptor } from '../Interceptor/interceptor.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import {
   SocialLoginModule,
   SocialAuthServiceConfig,
@@ -20,10 +23,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule} from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
@@ -65,7 +71,10 @@ import { TrendsComponent } from './trends/trends.component';
     MatFormFieldModule,
     MatInputModule,
     MDBBootstrapModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatSnackBarModule
   ],
   providers: [
     {
@@ -82,6 +91,11 @@ import { TrendsComponent } from './trends/trends.component';
         ],
       } as SocialAuthServiceConfig,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })

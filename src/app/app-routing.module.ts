@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   { path: 'home', component: HomeComponent },
   { path: 'main-nav/:photourl/:name/:email', component: MainNavComponent },
-  { path: 'edit/:email', component: EditComponent },
+  { path: 'edit/:email/:id', component: EditComponent },
   { path: 'delete/:email', component: DeleteComponent },
   { path: 'search/:photourl/:name/:email', component: SearchComponent },
   { path: 'create/:email', component: CreateComponent },

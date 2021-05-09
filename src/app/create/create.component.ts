@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import {
   FormBuilder,
@@ -6,6 +7,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { CrudOppService } from '../../services/crud-opp.service';
+import { ResultMessageService } from '../../services/result-message.service';
+import Oppurtunity from '../Model/Oppurtunity.model';
 
 @Component({
   selector: 'app-create',
@@ -13,17 +17,15 @@ import {
   styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit {
-  createParams: {
-    Jlocation: any;
-    skill: any;
-    HiringManager: any;
-    Department: any;
-    experience: any;
-    startDate: any;
-    endDate: any;
-  };
+  createParams: any;
+  email: any;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private crudOppService: CrudOppService,
+    private resultService: ResultMessageService,
+    private _Activatedroute: ActivatedRoute,
+  ) {
     this.createForm = this.formBuilder.group({
       Jlocation: [''],
       skill: [''],
@@ -32,24 +34,36 @@ export class CreateComponent implements OnInit {
       experience: [''],
       startDate: new Date(),
       endDate: new Date(),
+      description: [''],
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._Activatedroute.paramMap.subscribe((params) => {
+      this.email = params.get('email');
+    });
+  }
 
   createForm: any;
 
   createOppurtunity() {
     this.createParams = {
-      Jlocation: this.createForm.value.Jlocation,
+      location: this.createForm.value.Jlocation,
       skill: this.createForm.value.skill,
-      HiringManager: this.createForm.value.HiringManager,
-      Department: this.createForm.value.Department,
-      experience: this.createForm.value.experience,
+      hiringManager: this.createForm.value.HiringManager,
+      department: this.createForm.value.Department,
+      experience: parseInt(this.createForm.value.experience),
       startDate: this.createForm.value.startDate,
       endDate: this.createForm.value.endDate,
+      description: this.createForm.value.description,
+      user:{ 
+        email: this.email
+      }
     };
 
     console.log('Seach params ', this.createParams);
+    this.crudOppService.addOppurtunity(this.createParams).subscribe((res) => {
+      console.log(res);
+    });
   }
 }
