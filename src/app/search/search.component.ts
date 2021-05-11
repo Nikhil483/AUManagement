@@ -26,6 +26,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ResultMessageService } from '../../services/result-message.service';
 
 import Oppurtunity from '../Model/Oppurtunity.model';
 
@@ -50,7 +51,7 @@ import { CrudOppService } from '../../services/crud-opp.service';
 export class SearchComponent implements OnInit {
   //dataSource = new MatTableDataSource(ELEMENT_DATA);
   opps: MatTableDataSource<any>;
-  columnsToDisplay = ['oppId', 'skill', 'hiringManager', 'department'];
+  columnsToDisplay = ['oppId', 'skill', 'hiringManager', 'department',"location"];
   expandedElement: any | null;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -74,7 +75,8 @@ export class SearchComponent implements OnInit {
     private _Activatedroute: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private crudOppService: CrudOppService
+    private crudOppService: CrudOppService, 
+    private resultService: ResultMessageService
   ) {
     this.searchForm = this.formBuilder.group({
       Jlocation: [''],
@@ -168,6 +170,9 @@ export class SearchComponent implements OnInit {
     this.crudOppService.deleteOppurtunity(id).subscribe((res) => {
       console.log(res);
     });
+    alert('record with id ' + id + ' deleted.');
+    window.location.reload();
+    this.resultService.success('record with id ' + id + ' deleted.');
   }
 
   myAccount() {
@@ -175,7 +180,7 @@ export class SearchComponent implements OnInit {
   }
 
   signOut(): void {
+    localStorage.removeItem('user');
     this.router.navigate([''], { replaceUrl: true });
   }
 }
-

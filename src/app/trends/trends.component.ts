@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
+
+import { TrendsService } from '../../services/trends.service';
 
 @Component({
   selector: 'app-trends',
@@ -8,53 +10,97 @@ import {MatGridListModule} from '@angular/material/grid-list';
   styleUrls: ['./trends.component.scss'],
 })
 export class TrendsComponent implements OnInit {
-  constructor() {}
+  constructor(private trendsService: TrendsService) {}
 
-  ngOnInit(): void {}
+  OppurnityByYear: any;
+  SkillFrequency: any;
+  LocationFrequency: any;
+  ManagerFrequency: any;
+
+  yearChartDatasets:Array<any>;
+  yearChartLabels: Array<any>;
+
+  skillChartDatasets
+  skillChartLabels
+
+  locChartDatasets
+  locChartLabels
+
+  HMChartDatasets
+  HMChartLabels
+
+
+  ngOnInit(): void {
+    this.trendsService.getOppurnityByYear().subscribe((res) => {
+      console.log(res);
+      this.OppurnityByYear = res;
+      this.yearChartDatasets = [
+        {
+          data: this.getValues(this.OppurnityByYear),
+          label: 'Number Of Oppurtunity Every Year',
+        },
+      ];
+      this.yearChartLabels = Object.keys(this.OppurnityByYear);
+      //console.log(this.yearChartLabels,this.yearChartDatasets)
+    });
+
+    this.trendsService.getSkillFrequency().subscribe((res) => {
+      console.log(res);
+      this.SkillFrequency = res;
+      this.skillChartDatasets = [
+        {
+          data: this.getValues(this.SkillFrequency),
+          label: 'Frequency and Most Wanted Skills',
+          minimum : 0
+        },
+      ];
+      this.skillChartLabels = Object.keys(this.SkillFrequency);
+      //console.log(this.yearChartLabels,this.yearChartDatasets)
+    });
+
+    this.trendsService.getLocationFrequency().subscribe((res) => {
+      console.log(res);
+      this.LocationFrequency = res;
+      this.locChartDatasets = [
+        {
+          data: this.getValues(this.LocationFrequency),
+          label: 'Number Of Oppurtunity Every Year',
+        },
+      ];
+      this.locChartLabels = Object.keys(this.LocationFrequency);
+      //console.log(this.yearChartLabels,this.yearChartDatasets)
+    });
+
+    this.trendsService.getManagerFrequency().subscribe((res) => {
+      console.log(res);
+      this.ManagerFrequency = res;
+      this.HMChartDatasets = [
+        {
+          data: this.getValues(this.ManagerFrequency),
+          label: 'Number Of Oppurtunity Every Year',
+          
+        },
+      ];
+      this.HMChartLabels = Object.keys(this.ManagerFrequency);
+      //console.log(this.yearChartLabels,this.yearChartDatasets)
+    });
+  }
+
+  public getValues(json) {
+    let values = [];
+    let keys = Object.keys(json);
+    for (let i = 0; i < keys.length; i++) {
+      values.push(json[keys[i]]);
+    }
+    console.log(values);
+    return values;
+  }
 
   public yearChartType: string = 'bar';
   public skillChartType: string = 'horizontalBar';
   public locChartType: string = 'pie';
   public HMChartType: string = 'doughnut';
 
-  public yearChartDatasets: Array<any> = [
-    {
-      data: [65, 59, 80, 81, 56, 55, 40],
-      label: 'Number Of Oppurtunity Every Year',
-    },
-  ];
-  public skillChartDatasets: Array<any> = [
-    {
-      data: [65, 59, 80, 81, 56, 55, 40],
-      label: 'Frequency of skills',
-    },
-  ];
-  public locChartDatasets: Array<any> = [
-    { data: [300, 50, 100, 40, 120], label: 'Number Of Oppurtunities For Each Location' }
-  ]
-  public HMChartDatasets: Array<any> = [
-    { data: [300, 50, 100, 40, 120], label: 'Frequency of Hiring Manager Stats Allotment' }
-  ]
-
-  public yearChartLabels: Array<any> = [
-    '2010',
-    '2011',
-    '2012',
-    '2013',
-    '2014',
-    '2015',
-  ];
-  public skillChartLabels: Array<any> = [
-    'Angular',
-    'Spring Boot',
-    'DataBase',
-    'Machine learning',
-    'Devolps',
-    'BlockChain',
-  ];
-  public locChartLabels: Array<any> = ['Bangalore', 'Kolkata', 'Hyderabad', 'Delhi', 'Mumbai'];
-  public HMChartLabels: Array<any> = ['Suresh', 'Ramesh', 'Sangeetha', 'Arun', 'Preksha'];
-  
   public yearChartColors: Array<any> = [
     {
       backgroundColor: [
@@ -100,9 +146,15 @@ export class TrendsComponent implements OnInit {
   public locChartColors: Array<any> = [
     {
       backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
-      hoverBackgroundColor: ['#FF5A5E', '#5AD3D1', '#FFC870', '#A8B3C5', '#616774'],
+      hoverBackgroundColor: [
+        '#FF5A5E',
+        '#5AD3D1',
+        '#FFC870',
+        '#A8B3C5',
+        '#616774',
+      ],
       borderWidth: 2,
-    }
+    },
   ];
 
   public chartOptions: any = {

@@ -22,13 +22,17 @@ export class CrudOppService {
     return this.http.post<any>(`${this.apiServerUrl}/addOppurtunity`,oppurtunity);
   }
 
+  public updateOppurtunity(oppurtunity: any): Observable<any> {
+    return this.http.put<any>(`${this.apiServerUrl}/updateOppurtunity`,oppurtunity);
+  }
+
   public getOppurtunity(id: number): Observable<any> {
     console.log("id",`${this.apiServerUrl}/getOppurtunity`,id)
-    return this.http.get<any>(`${this.apiServerUrl}/getOppurtunity`,id);
+    return this.http.get<any>(`${this.apiServerUrl}/getOppurtunity/${id}`);
   }
 
   public deleteOppurtunity(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiServerUrl}/deleteOppurtunity`id);
+    return this.http.delete<any>(`${this.apiServerUrl}/deleteOppurtunity/${id}`);
   }
 
 }

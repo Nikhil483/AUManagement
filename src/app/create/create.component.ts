@@ -11,6 +11,8 @@ import { CrudOppService } from '../../services/crud-opp.service';
 import { ResultMessageService } from '../../services/result-message.service';
 import Oppurtunity from '../Model/Oppurtunity.model';
 
+
++3
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -61,9 +63,23 @@ export class CreateComponent implements OnInit {
       }
     };
 
+    const keys = Object.keys(this.createParams);
+  
+    for(let i=0; i< keys.length;i++){
+      if(this.createParams[keys[i]]===""){
+        this.resultService.success(
+          "Please all the fields"
+        );
+        return;
+      }
+    }
+
     console.log('Seach params ', this.createParams);
     this.crudOppService.addOppurtunity(this.createParams).subscribe((res) => {
       console.log(res);
+      this.resultService.success(
+        "Oppurtinity added ....!"
+      );
     });
   }
 }

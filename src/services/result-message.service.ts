@@ -10,7 +10,7 @@ export class ResultMessageService {
 
   config: MatSnackBarConfig = {
     duration: 3000,
-    horizontalPosition: 'right',
+    horizontalPosition: 'center',
     verticalPosition: 'top'
   };
 

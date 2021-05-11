@@ -21,33 +21,35 @@
         <input type="text" formControlName="skill" mdbInput mdbValidate />
       </div>
       <div class="contact_no md-form">
-        <label htmlFor="email">Experience</label>
-        <input type="text" formControlName="experience" mdbInput mdbValidate />
+        <label htmlFor="email">Experience (years)</label>
+        <input type="number" formControlName="experience" mdbInput mdbValidate />
       </div>
 
       <div class="address md-form">
         <label htmlFor="email">Department</label>
-        <input type="text" formControlName="Department" name="address" mdbInput mdbValidate />
-      </div>
-      <div class="md-form">
-        <i class="fas fa-calendar-alt prefix grey-text"></i>
         <input
           type="text"
-          id="date-picker-example"
-          class="form-control datepicker"
+          formControlName="Department"
+          name="address"
+          mdbInput
+          mdbValidate
         />
-        <label for="date-picker-example">Start Date</label>
       </div>
 
-      <div class="md-form">
-        <i class="fas fa-calendar-alt prefix grey-text"></i>
-        <input
-          type="text"
-          id="date-picker-example"
-          class="form-control datepicker"
-        />
-        <label for="date-picker-example">End Date</label>
+      <div class="email md-form">
+        <input matInput [matDatepicker]="startDate" placeholder="Start Date" formControlName="startDate" />
+        <mat-datepicker-toggle [for]="startDate" matPrefix>
+        </mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
       </div>
+
+      <div class="email md-form">
+        <input matInput [matDatepicker]="endDate" placeholder="End Date" formControlName="endDate"/>
+        <mat-datepicker-toggle [for]="endDate" matPrefix>
+        </mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+      </div>
+
       <div class="email md-form">
         <label htmlFor="email">Description</label>
         <input type="text" formControlName="description" mdbInput mdbValidate />
